@@ -31,9 +31,6 @@ IntList::~IntList() {
 int IntList::sum() const {
    int s = 0;
  Node* curr = head;
-    if (curr==nullptr){
-return 0;
-    }
     while(curr != nullptr){
     Node* nNode = curr;
     s += nNode->info;
@@ -58,17 +55,17 @@ return false;
 }
 // returns maximum value in list, or 0 if empty list
 int IntList::max() const {
-  Node* curr = head;
-  int max = 0;
-  int sec = 0;
-  while(curr!=nullptr && curr->next!=nullptr ){
-      max = curr->info;
-      Node* nNode = curr->next;
-      sec = nNode->info;
-      if(sec>max){
-          max = sec;
+    Node* curr = head;
+  if(curr==nullptr){
+      return 0;
+  }
+  int max = curr->info;
+  Node* sec = curr->next;
+  while(sec!=nullptr){
+      if(sec->info>max){
+          max = sec->info;
       }
-      curr = nNode;
+      sec = sec->next;
   }
   return max;
 }
@@ -79,9 +76,9 @@ double IntList::average() const {
     if (head == nullptr){
         return 0.0;
     }
-   // int t = sum();
-   // int b = count();
-    double val = (sum()/count());
+   double t = sum();
+   int b = count();
+    double val = (t/b);
     return val;
 }
 
