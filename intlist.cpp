@@ -18,19 +18,19 @@ IntList::IntList(const IntList& source): IntList() {
 
 // destructor deletes all nodes
 IntList::~IntList() {
-/*   Node* curr = head;
+   Node* curr = head;
    while(curr!=nullptr){
-   Node* newNode = curr->next;
+   Node* tNode = curr->next;
    delete curr;
-   curr = newNode;
-   }*/
+   curr = tNode;
+   }
 }
 
 
 // return sum of values in list
 int IntList::sum() const {
    int s = 0;
-    Node* curr = head;
+ Node* curr = head;
     if (curr==nullptr){
 return 0;
     }
@@ -103,6 +103,7 @@ void IntList::push_front(int value) {
 void IntList::push_back(int value) {
     Node* curr= new Node;
     curr->info = value;
+    curr->next = nullptr;
     if (head==nullptr){
         head = curr;
         tail = curr;
@@ -131,7 +132,22 @@ curr = n->next;
 //Assignment operator should copy the list from the source
 //to this list, deleting/replacing any existing nodes
 IntList& IntList::operator=(const IntList& source){
-    //IMPLEMENT
+   if (this == &source){
+       return *this;
+   }
+  Node* curr = head;
+ while (curr!= nullptr){
+Node* tNode = curr->next;
+delete curr;
+curr = tNode;
+ }
+head = nullptr;
+tail = nullptr;
+ Node* c = source.head;
+ while(c!= nullptr){
+push_back(c->info);
+c = c->next;
+ }
     return *this;
 }
 
