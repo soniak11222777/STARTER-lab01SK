@@ -8,8 +8,12 @@
 using std::cout;
 
 // copy constructor
-IntList::IntList(const IntList& source) {
-   // this.info = source.info;
+IntList::IntList(const IntList& source): IntList() {
+   Node* c = source.head;
+   while(c!=nullptr){
+       push_back(c->info);
+       c = c->next;
+   }
 }
 
 // destructor deletes all nodes
@@ -41,20 +45,32 @@ return 0;
 
 // returns true if value is in the list; false if not
 bool IntList::contains(int value) const { 
-   /* Node* here = head;
-    while(here != nullptr){
-    if (here->info == value){
+   Node* curr = head;
+  // cout << "curr: " <<  curr->info << endl;
+    while(curr != nullptr){
+    if (curr->info == value){
     return true;
     }
-Node* nNode = here->next;
-here = nNode
+Node* nNode = curr->next;
+curr = nNode;
 }
-return false;*/
 return false;
 }
 // returns maximum value in list, or 0 if empty list
 int IntList::max() const {
-   return 0;
+  Node* curr = head;
+  int max = 0;
+  int sec = 0;
+  while(curr!=nullptr && curr->next!=nullptr ){
+      max = curr->info;
+      Node* nNode = curr->next;
+      sec = nNode->info;
+      if(sec>max){
+          max = sec;
+      }
+      curr = nNode;
+  }
+  return max;
 }
 
 // returns average (arithmetic mean) of all values, or
